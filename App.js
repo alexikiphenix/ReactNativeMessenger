@@ -59,7 +59,10 @@ const App = () => {
         <View style={styles.messagesBox}>                 
           {
             talk[2].messages.map((message)=>{
-             return <Message talkNumber={talk[1].talkNumber} sender={message.sender} />
+             return <Message talkNumber={talk[1].talkNumber} 
+                sender={message.sender} 
+                content={message.content}
+              />
             })
           }      
         </View>

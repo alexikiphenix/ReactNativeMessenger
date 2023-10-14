@@ -8,21 +8,25 @@ const Message = ({id, talkNumber, sender, recipient, content}) => {
         {
           sender === talkNumber ? 
           ( 
-            <Text style={styles.msgUser}>
+            <View style={styles.msgUser}>
               <View>
-                <Text>sender:{sender}</Text>
-            	</View>              
-              <Text>{content}</Text>
-            </Text>
+                <Text>{sender}</Text>
+            	</View>   
+              <View>
+                <Text>{content}</Text>
+              </View>           
+            </View>
           )
           :
           ( 
-            <Text style={styles.msgNonUser}>
+            <View style={styles.msgNonUser}>
               <View>
-                <Text>sender:{sender}</Text>
-            	</View>              
-              <Text>{content}</Text>
-            </Text>
+                <Text>{sender}</Text>
+            	</View>     
+              <View>
+                <Text>{content}</Text>
+              </View>         
+            </View>
           )        
         }
       </View>
@@ -31,18 +35,18 @@ const Message = ({id, talkNumber, sender, recipient, content}) => {
 
 const styles = StyleSheet.create(
     {
-        msgUser: {
-            width: '45%',
-            padding: 7,
-            alignSelf: 'flex-end',
-            backgroundColor: 'lightgreen'
-          },
-          msgNonUser: {
-            width: '45%',
-            padding: 7,
-            alignSelf: 'flex-start',
-            backgroundColor: 'pink'
-          },
+      msgUser: {          
+          width: '45%',
+          padding: 7,
+          alignSelf: 'flex-end',
+          backgroundColor: 'lightgreen'
+        },
+        msgNonUser: {
+          width: '45%',
+          padding: 7,
+          alignSelf: 'flex-start',
+          backgroundColor: 'pink'
+        },
     }
 )
 
