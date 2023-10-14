@@ -1,5 +1,6 @@
 import { View, Text, StyleSheet } from 'react-native';
 import Message from './components/Message';
+import Talk from './data/talk.json';
 
 const talk = [
   {id: 1}, 
