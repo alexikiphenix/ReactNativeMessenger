@@ -1,33 +1,52 @@
 import { View, Text, StyleSheet } from 'react-native';
+import Message from './components/Message';
 
-const userId = 1;
-
-const Message = ({id, senderName, senderId, recipientId, content}) => {
-  return (
-    <View>
+const talk = [
+  {id: 1}, 
+  {talkNumber: 33611111111},
+  {
+    messages : [
       {
-        senderId == userId ? 
-        ( 
-          <Text style={styles.msgUser}>
-            {senderName} 
-            <Text>{content}</Text>
-          </Text>
-        )
-        :
-        ( 
-          <Text style={styles.msgNonUser}>
-            {senderName} 
-            <Text>{content}</Text>
-          </Text>
-        )        
-      }
-    </View>
-  )
-}
+        id: 1, 
+        sender: 33611111111,
+        recipient: 33622222222,
+        content: "Coucou"
+      },
+      {
+        id: 2, 
+        sender: 33622222222,
+        recipient: 33611111111,
+        content: "Hello"
+      },
+      {
+        id: 3, 
+        sender: 33611111111,
+        recipient: 33622222222,
+        content: "Comment vas-tu ?"
+      },
+      {
+        id: 4, 
+        sender: 33622222222,
+        recipient: 33611111111,
+        content: "Bien merci et toi ?"
+      },
+      {
+        id: 5, 
+        sender: 33611111111,
+        recipient: 33622222222,
+        content: "au top"
+      },
+    ]  
+  }
+
+];
+
+
+
 
 const App = () => {
-  const getNames = (id, user, recipientId) =>{
-      return `${id} - expéditeur - ${user} -------------- destinataire : ${recipientId}`;
+  const getNames = (id, user, recipient) =>{
+      return `${id} - expéditeur - ${user} -------------- destinataire : ${recipient}`;
   }
     return (
       <View style={styles.wrapper} >
@@ -37,9 +56,12 @@ const App = () => {
             <Text>Photo</Text>
           </Text>
         </View>
-        <View style={styles.messagesBox}>          
-          <Message senderId="1" />
-          <Message user="Marcus" recipientId="Louisa" />       
+        <View style={styles.messagesBox}>                 
+          {
+            talk[2].messages.map((message)=>{
+             return <Message talkNumber={talk[1].talkNumber} sender={message.sender} />
+            })
+          }      
         </View>
         <View style={styles.sendBox}>
           <Text>
@@ -75,19 +97,7 @@ const styles = StyleSheet.create({
     flex: 2,
     padding: 5,
     backgroundColor: 'blue'
-  },
-  msgUser: {
-    width: '45%',
-    padding: 7,
-    alignSelf: 'flex-end',
-    backgroundColor: 'lightgreen'
-  },
-  msgNonUser: {
-    width: '45%',
-    padding: 7,
-    alignSelf: 'flex-start',
-    backgroundColor: 'pink'
-  },
+  }
 })
 
 export default App;
