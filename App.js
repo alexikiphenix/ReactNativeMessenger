@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
     // borderColor: 'black'
   },
   messagesBox : {
-    flex: 10,
+    flex: 12,
     padding: 5,
     borderWidth: 1,   
   }
