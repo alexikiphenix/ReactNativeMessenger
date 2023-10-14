@@ -2,11 +2,11 @@ import { View, Text, StyleSheet } from 'react-native';
 const sender2 = 1;
 const id2 = 2;
 
-const Message = ({id, talkNumber, sender, recipient, content}) => {
+const Message = ({id, phone, sender, recipient, content}) => {
     return (
       <View>
         {
-          sender === talkNumber ? 
+          sender === phone ? 
           ( 
             <View style={styles.msgUser}>
               <View>

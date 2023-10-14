@@ -1,47 +1,6 @@
 import { View, Text, StyleSheet } from 'react-native';
 import Message from './components/Message';
-import Talk from './data/talk.json';
-
-const talk = [
-  {id: 1}, 
-  {talkNumber: 33611111111},
-  {
-    messages : [
-      {
-        id: 1, 
-        sender: 33611111111,
-        recipient: 33622222222,
-        content: "Coucou"
-      },
-      {
-        id: 2, 
-        sender: 33622222222,
-        recipient: 33611111111,
-        content: "Hello"
-      },
-      {
-        id: 3, 
-        sender: 33611111111,
-        recipient: 33622222222,
-        content: "Comment vas-tu ?"
-      },
-      {
-        id: 4, 
-        sender: 33622222222,
-        recipient: 33611111111,
-        content: "Bien merci et toi ?"
-      },
-      {
-        id: 5, 
-        sender: 33611111111,
-        recipient: 33622222222,
-        content: "au top"
-      },
-    ]  
-  }
-
-];
-
+import talk from './data/talk.json';
 
 
 
@@ -58,9 +17,9 @@ const App = () => {
           </Text>
         </View>
         <View style={styles.messagesBox}>                 
-          {
-            talk[2].messages.map((message)=>{
-             return <Message talkNumber={talk[1].talkNumber} 
+          {         
+            talk.messages.map((message)=>{
+             return <Message phone={talk.phone} 
                 sender={message.sender} 
                 content={message.content}
               />
