@@ -1,6 +1,7 @@
 {  
   "id": 1, 
   "phone": 33611111111,
+  "recipient": 33622222222,
   "messages" : [
       {
         "id": 1, 

@@ -1,28 +1,36 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, Button, TextInput } from 'react-native';
+import { View, Text, StyleSheet, Button, TextInput, ScrollView } from 'react-native';
 import Message from './components/Message';
 import talk from './data/talk.json';
 
 
+const messagesArray = []
+talk.messages.map(
+  (message) => {      
+    messagesArray.push(
+       [ 
+        message.id, message.sender, 
+        message.recipient, message.content        
+       ]
+     )
+  }
+)
 
 const App = () => {
-
-  const messagesArray = []
-  talk.messages.map(
-    (message) => {      
-      messagesArray.push(
-         [ 
-          message.id, message.sender, 
-          message.recipient, message.content        
-         ]
-       )
-    }
-  )
   const [messages, setMessages] = useState(messagesArray);
   const [message, setMessage] = useState("");
 
-  const handlePress = (messages) => {
-    setMessages(messages);
+  const handlePress = () => {
+    const newMessage = [
+      new Date().getTime(),
+      talk.phone,
+      talk.recipient,
+      message
+    ]
+
+    messagesArray.push(newMessage);
+    setMessage("");
+    setMessages(messagesArray);
   }
 
 
@@ -33,18 +41,20 @@ const App = () => {
           <Text style={styles.picAndName}>Photo</Text>
           
         </View>
-        <View style={styles.messagesBox}>                 
-          {         
-            messages.map((message)=>{
-              console.log(message[0]);
-              return <Message 
-              key={message[0]}
-              phone={talk.phone} 
-              sender={message[1]} 
-              content={message[3]}
-              />
-            })
-          }      
+        <View style={styles.messagesBox}>   
+          <ScrollView>
+            {         
+              messages.map((message)=>{
+                console.log(message[0]);
+                return <Message 
+                key={message[0]}
+                phone={talk.phone} 
+                sender={message[1]} 
+                content={message[3]}
+                />
+              })
+            }      
+          </ScrollView>
         </View>
         <View style={styles.sendBox}>
           <TextInput 
@@ -52,11 +62,11 @@ const App = () => {
             value={ message }
             placeholder="Ecrire ici"
             multiline={true}
-            
+            onChangeText= {(message) => {setMessage(message)}}
           />          
           <Text>
             <Button 
-              onPress = {() => {setMessages(messages)}}
+              onPress = {() => {handlePress()}}
               title="Envoyer" 
               color='green'
               accessibilityLabel="bouton envoyer"
