@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import { View, Text, StyleSheet, Button } from 'react-native';
 import Message from './components/Message';
 import talk from './data/talk.json';
@@ -5,6 +6,24 @@ import talk from './data/talk.json';
 
 
 const App = () => {
+
+  const messagesArray = []
+  talk.messages.map(
+    (message) => {      
+      messagesArray.push(
+         [ 
+          message.id, message.sender, 
+          message.recipient, message.content        
+         ]
+       )
+    }
+  )
+  const [messages, setMessages] = useState(messagesArray);
+
+  const handlePress = (messages) => {
+    setMessages(messages);
+  }
+
   const getNames = (id, user, recipient) =>{
       return `${id} - expéditeur - ${user} -------------- destinataire : ${recipient}`;
   }
@@ -12,18 +31,18 @@ const App = () => {
       <View style={styles.wrapper} >
         <View style={styles.profileHeader}>
           <Text>Arrow back</Text>
-          <Text style={styles.picAndName}>
-            <Text>Photo</Text>
-          </Text>
+          <Text style={styles.picAndName}>Photo</Text>
+          
         </View>
         <View style={styles.messagesBox}>                 
           {         
-            talk.messages.map((message)=>{
-             return <Message 
-                key={message.id}
-                phone={talk.phone} 
-                sender={message.sender} 
-                content={message.content}
+            messages.map((message)=>{
+              console.log(message[0]);
+              return <Message 
+              key={message[0]}
+              phone={talk.phone} 
+              sender={message[1]} 
+              content={message[3]}
               />
             })
           }      
@@ -31,6 +50,7 @@ const App = () => {
         <View style={styles.sendBox}>
           <Text>
             <Button 
+              onPress = {() => {setMessages(messages)}}
               title="Envoyer" 
               color='green'
               accessibilityLabel="bouton envoyer"
