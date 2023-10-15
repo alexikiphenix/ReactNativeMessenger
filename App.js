@@ -2,23 +2,52 @@ import React, { useState } from "react";
 import { View, Text, StyleSheet, Button, TextInput, ScrollView } from 'react-native';
 import Message from './components/Message';
 import talk from './data/talk.json';
+import randomMessages from './data/randomMessages.json';
 
+const getMessagesJSONInArray = ( arrayObj ) =>
+{
+  const messagesArray = []
+  arrayObj.map(
+    (message) => {      
+      messagesArray.push(
+         [ 
+          message.id, message.sender, 
+          message.recipient, message.content        
+         ]
+       )
+    }
+  )
+  return messagesArray;
+}
 
-const messagesArray = []
-talk.messages.map(
-  (message) => {      
-    messagesArray.push(
-       [ 
-        message.id, message.sender, 
-        message.recipient, message.content        
-       ]
-     )
-  }
-)
+let messagesArray = getMessagesJSONInArray(talk.messages);
 
+const getRandomIntInclusive = (min, max) => {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+const getRandomMessages = (array) =>
+{
+  return array[getRandomIntInclusive(0, array.length-1)];  
+}
+ 
 const App = () => {
   const [messages, setMessages] = useState(messagesArray);
   const [message, setMessage] = useState("");
+
+  const addRandomMessage = () => {
+    const newMessage = [
+      new Date().getTime(),
+      talk.recipient,
+      talk.phone,
+      getRandomMessages(randomMessages)
+    ]
+    messagesArray = messages;
+    messagesArray.push(newMessage);    
+    setMessages(messagesArray);
+  }
 
   const handlePress = () => {
     const newMessage = [
@@ -27,10 +56,11 @@ const App = () => {
       talk.recipient,
       message
     ]
-
     messagesArray.push(newMessage);
     setMessage("");
     setMessages(messagesArray);
+
+    setTimeout(addRandomMessage, 2000);
   }
 
 
@@ -44,8 +74,7 @@ const App = () => {
         <View style={styles.messagesBox}>   
           <ScrollView>
             {         
-              messages.map((message)=>{
-                console.log(message[0]);
+              messages.map((message)=>{                
                 return <Message 
                 key={message[0]}
                 phone={talk.phone} 
@@ -96,6 +125,7 @@ const styles = StyleSheet.create({
   messagesBox : {
     flex: 12,
     padding: 5,
+    marginBottom: 100,
     // borderWidth: 1,   
   }
   ,
