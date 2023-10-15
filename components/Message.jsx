@@ -8,25 +8,17 @@ const Message = ({id, phone, sender, recipient, content}) => {
         {
           sender === phone ? 
           ( 
-            <View style={styles.msgUser}>
-              <View>
-                <Text>{sender}</Text>
-            	</View>   
-              <View>
-                <Text>{content}</Text>
-              </View>           
+            <View style={styles.msgUser}>              
+                <Text style={ styles.msgHeader }>{sender}</Text>            	
+                <Text>{content}</Text>                      
             </View>
           )
           :
           ( 
-            <View style={styles.msgNonUser}>
-              <View>
-                <Text>{sender}</Text>
-            	</View>     
-              <View>
+            <View style={styles.msgNonUser}>              
+                <Text style={ styles.msgHeader }>{sender}</Text>
                 <Text>{content}</Text>
-              </View>         
-            </View>
+            </View>                     
           )        
         }
       </View>
@@ -38,7 +30,7 @@ const styles = StyleSheet.create(
       msgUser: {          
           width: '45%',
           padding: 7,
-          alignSelf: 'flex-end',
+          alignSelf: 'flex-end',          
           backgroundColor: 'lightgreen'
         },
         msgNonUser: {
@@ -47,6 +39,12 @@ const styles = StyleSheet.create(
           alignSelf: 'flex-start',
           backgroundColor: 'pink'
         },
+        msgHeader: {
+          paddingBottom: 5,
+          fontSize: 10,
+          borderBottomWidth: 1,
+          borderColor: 'white',
+        }
     }
 )
 

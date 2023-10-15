@@ -19,7 +19,9 @@ const App = () => {
         <View style={styles.messagesBox}>                 
           {         
             talk.messages.map((message)=>{
-             return <Message phone={talk.phone} 
+             return <Message 
+                key={message.id}
+                phone={talk.phone} 
                 sender={message.sender} 
                 content={message.content}
               />
@@ -28,7 +30,7 @@ const App = () => {
         </View>
         <View style={styles.sendBox}>
           <Text>
-            {/* <TextImput></TextImput> */}
+           
           </Text>
         </View>
       </View>
