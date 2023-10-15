@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Button } from 'react-native';
 import Message from './components/Message';
 import talk from './data/talk.json';
 
@@ -30,7 +30,11 @@ const App = () => {
         </View>
         <View style={styles.sendBox}>
           <Text>
-           
+            <Button 
+              title="Envoyer" 
+              color='green'
+              accessibilityLabel="bouton envoyer"
+            />
           </Text>
         </View>
       </View>
@@ -55,13 +59,15 @@ const styles = StyleSheet.create({
   messagesBox : {
     flex: 12,
     padding: 5,
-    borderWidth: 1,   
+    // borderWidth: 1,   
   }
   ,
   sendBox: {
     flex: 2,
+    justifyContent: 'flex-end',
+    alignItems: 'center',
     padding: 5,
-    backgroundColor: 'blue'
+    backgroundColor: 'lightblue'
   }
 })
 
