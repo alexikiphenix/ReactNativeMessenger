@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, Button } from 'react-native';
+import { View, Text, StyleSheet, Button, TextInput } from 'react-native';
 import Message from './components/Message';
 import talk from './data/talk.json';
 
@@ -19,14 +19,13 @@ const App = () => {
     }
   )
   const [messages, setMessages] = useState(messagesArray);
+  const [message, setMessage] = useState("");
 
   const handlePress = (messages) => {
     setMessages(messages);
   }
 
-  const getNames = (id, user, recipient) =>{
-      return `${id} - expéditeur - ${user} -------------- destinataire : ${recipient}`;
-  }
+
     return (
       <View style={styles.wrapper} >
         <View style={styles.profileHeader}>
@@ -48,12 +47,20 @@ const App = () => {
           }      
         </View>
         <View style={styles.sendBox}>
+          <TextInput 
+            style={styles.msgInput} 
+            value={ message }
+            placeholder="Ecrire ici"
+            multiline={true}
+            
+          />          
           <Text>
             <Button 
               onPress = {() => {setMessages(messages)}}
               title="Envoyer" 
               color='green'
               accessibilityLabel="bouton envoyer"
+              onChange = { () => {write('saisie text')}}
             />
           </Text>
         </View>
@@ -88,6 +95,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 5,
     backgroundColor: 'lightblue'
+  },
+  msgInput: {
+    width: '100%',
+    height: 40,
+    borderWidth: 1,
   }
 })
 
