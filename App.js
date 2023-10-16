@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet, Button, TextInput, ScrollView } from 'react-native';
 import Message from './components/Message';
 import talk from './data/talk.json';
@@ -27,19 +27,19 @@ const getRandomIntInclusive = (min, max) => {
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
-
-const getRandomMessages = (array) =>
-{
-  return array[getRandomIntInclusive(0, array.length-1)];  
-}
- 
 const App = () => {
+  
   const [messages, setMessages] = useState(messagesArray);
+  const getRandomMessages = (array) =>
+  {
+    return array[getRandomIntInclusive(0, array.length-1)];  
+  }
+   
   const [message, setMessage] = useState("");
 
   const addRandomMessage = () => {
     const newMessage = [
-      new Date().getTime(),
+      's'+new Date().getTime(),
       talk.recipient,
       talk.phone,
       getRandomMessages(randomMessages)
@@ -47,6 +47,7 @@ const App = () => {
     messagesArray = messages;
     messagesArray.push(newMessage);    
     setMessages(messagesArray);
+    
   }
 
   const handlePress = () => {
@@ -59,8 +60,11 @@ const App = () => {
     messagesArray.push(newMessage);
     setMessage("");
     setMessages(messagesArray);
-
-    setTimeout(addRandomMessage, 2000);
+    console.log(messagesArray);
+    console.log(messages);
+    addRandomMessage();
+    //setTimeout(addRandomMessage, 2000);
+    console.log(messages);
   }
 
 
@@ -125,7 +129,7 @@ const styles = StyleSheet.create({
   messagesBox : {
     flex: 12,
     padding: 5,
-    marginBottom: 100,
+    marginBottom: 10,
     // borderWidth: 1,   
   }
   ,

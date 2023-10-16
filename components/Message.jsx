@@ -28,14 +28,14 @@ const styles = StyleSheet.create(
     {
       msgUser: {          
           width: '45%',
-          marginBottom: 30,
+          marginBottom: 10,
           padding: 7,
           alignSelf: 'flex-end',          
           backgroundColor: 'lightgreen'
         },
         msgNonUser: {
           width: '45%',
-          marginBottom: 30,
+          marginBottom: 10,
           padding: 7,
           alignSelf: 'flex-start',
           backgroundColor: 'pink'
