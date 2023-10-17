@@ -1,23 +1,21 @@
 import React, { useEffect, useState, useCounter } from 'react';
 import { View, Text, StyleSheet, Button } from 'react-native';
 
-
+const multiply = (nb1, nb2) => {
+  return nb1 * nb2;
+}
 const App = () => {
-  const [counter, setCounter] = useState(0);
-  const handlePress = () => {    
-    // La fonction callback permet d'obtenir valeur courante
-    setCounter(current => current + 1);
-
-    // Sans current modification au moment du re-render :  
-    // setCounter(counter + 1);
+  const [multiplication, setMultiplication] = useState(()=>multiply(1, 2));
+  const handlePress = () => {
+    setMultiplication(current => current * 2);
   }
 
   // Réactualisation
-  console.log('Reactualisation (Re-render)', counter);
+  console.log('Reactualisation (Re-render)', multiplication);
   return (
     <View style={styles.container}>
       <Text>
-          <Button onPress={handlePress} title="cliquer ici" />{counter}
+          <Button onPress={handlePress} title="cliquer ici" />{multiplication}
       </Text>     
     </View>
   );
